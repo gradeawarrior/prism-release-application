@@ -13,6 +13,14 @@
       "Oceania": "#4F2170",
       "South America": "#CD2900"
     }
+//    var palette = {
+//      "top": "#D68300",
+//      "1": "#4D7A00",
+//      "2": "#6D87CF",
+//      "3": "#D4E200",
+//      "4": "#4F2170",
+//      "5": "#CD2900"
+//    }
 
     var that = {
       init:function(system){
@@ -184,7 +192,8 @@
       asia:{title:"Asia", p:{stiffness:500}, source:_sources.nations},
       europe:{title:"Europe", p:{stiffness:300}, source:_sources.nations},
       mideast:{title:"Middle East", p:{stiffness:500}, source:_sources.nations},
-      risk:{title:"Risk", p:{stiffness:400}, source:_sources.risk}
+      risk:{title:"Risk", p:{stiffness:400}, source:_sources.risk},
+      lab:{title:"Lab", p:{stiffness:400}, source:_sources.lab}
     }
     
     var that = {

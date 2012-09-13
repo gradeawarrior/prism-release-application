@@ -1,0 +1,45 @@
+{
+    "nodes": {
+        "lab": {"region": "Africa"},
+        "share_staging": {"region": "Africa"},
+        "share_integration": {"region": "Asia"},
+        "share_dev": {"region": "Asia"},
+        "share_ci": {"region": "Asia"},
+        "share_dev_peter": {"region": "level4"},
+        "share_dev_jw": {"region": "level4"},
+        "jgmyers": {"region": "Africa"},
+        "jgmyers_farmd": {"region": "Africa"},
+        "jgmyers_farmd_test": {"region": "Asia"},
+        "staging": {"region": "Africa"},
+        "appservices_release": {"region": "Asia"},
+        "appservices_ci": {"region": "Asia"}
+        },
+    "edges": {
+        "lab": {
+            "share_staging": {},
+            "staging": {},
+            "jgmyers": {},
+            "jgmyers_farmd": {}
+        },
+        "share_staging": {
+            "share_integration": {}
+        },
+        "share_integration": {
+            "share_dev": {},
+            "share_ci": {}
+        },
+        "share_dev": {
+            "share_dev_peter": {},
+            "share_dev_jw": {}
+        },
+        "staging": {
+            "appservices_release": {}
+        },
+        "appservices_release": {
+            "appservices_ci": {}
+        },
+        "jgmyers_farmd": {
+            "jgmyers_farmd_test": {}
+        }
+    }
+}
