@@ -1,4 +1,6 @@
 PrismReleaseApplication::Application.routes.draw do
+  get "arbor/twitterapi"
+
   get "arbor/home"
 
   get "arbor/atlas"
