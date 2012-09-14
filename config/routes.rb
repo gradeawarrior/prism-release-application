@@ -1,4 +1,6 @@
 PrismReleaseApplication::Application.routes.draw do
+  get "graph/environment"
+
   get "arbor/twitterapi"
 
   get "arbor/home"
