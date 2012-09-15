@@ -1,4 +1,6 @@
 PrismReleaseApplication::Application.routes.draw do
+  get "perry/gate"
+
   get "graph/environment"
 
   get "arbor/twitterapi"
