@@ -1,0 +1,18 @@
+<div data-role="page">
+
+  <div data-role="header">
+    
+    <a data-theme="f" title="Home" href="/perry/gate" rel="external" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home ui-btn ui-btn-up-f ui-btn-icon-notext ui-btn-corner-all ui-shadow">
+        <span class="ui-btn-inner ui-btn-corner-all">
+            <span class="ui-btn-text">Home</span>
+            <span class="ui-icon ui-icon-home ui-icon-shadow"></span>
+        </span>
+    </a>
+    <h1>Prism Release</h1>
+  </div><!-- /header -->
+  
+  <button type="submit" data-theme="b" name="submit" value="submit-value" class="ui-btn-hidden" aria-disabled="false" onclick="parent.location='/perry/gate?path=<%= params["path"] %>&release=<%= params["release"] %>&method=promote'">Promote</button>
+  <button type="submit" data-theme="b" name="submit" value="submit-value" class="ui-btn-hidden" aria-disabled="false" onclick="parent.location='/perry/gate?path=<%= params["path"] %>&release=<%= params["release"] %>&method=promote'">Accept</button>
+  <button type="submit" data-theme="b" name="submit" value="submit-value" class="ui-btn-hidden" aria-disabled="false" onclick="parent.location='/perry/gate'">Certify</button>
+
+</div>

@@ -1,21 +1,55 @@
-<h1>Perry#gate</h1>
-<p>Find me in app/views/perry/gate.html.erb</p>
 <div data-role="page">
 
   <div data-role="header">
-          <h1>My Title</h1>
+    
+    <a data-theme="f" title="Home" href="/perry/gate" rel="external" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-left jqm-home ui-btn ui-btn-up-f ui-btn-icon-notext ui-btn-corner-all ui-shadow">
+        <span class="ui-btn-inner ui-btn-corner-all">
+            <span class="ui-btn-text">Home</span>
+            <span class="ui-icon ui-icon-home ui-icon-shadow"></span>
+        </span>
+    </a>
+    <% if (params["path"] == "") %>
+      <h1>Prism Gates</h1>
+    <% else %>
+      <h1><%= params["path"] %> Gate</h1>
+    <% end %>
   </div><!-- /header -->
 
-  <div data-role="content">	
-          <p>Hello world</p>		
-  </div><!-- /content -->
+  <ul data-role="listview" data-theme="b">
+    <% if (params["path"] != "" ) %>
+      <li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-corner-top">Releases</li>
+      <% for gate in @result.keys %>
+          <% if (gate == params["path"]) %>
+            <% for release in @result[gate] %>
+              <li>
+                <a href="/perry/release?path=<%= params["path"] %>&release=<%= release %>" rel="external" data-theme="e"><%= release %></a>
+              </li>
+            <% end %>
+          <% end %>
+      <% end %>
+    <% end %>
+  </ul>
   
-  <ul data-role="listview" data-inset="true" data-filter="true">
-  <li><a href="#">Acura</a></li>
-  <li><a href="#">Audi</a></li>
-  <li><a href="#">BMW</a></li>
-  <li><a href="#">Cadillac</a></li>
-  <li><a href="#">Ferrari</a></li>
-</ul>
+  <ul data-role="listview" data-theme="a">
+    <% if (params["path"] == "" ) %>
+      <% for gate in @result %>
+          <li>
+            <a href="?path=<%= gate['name'] %>" rel="external" data-theme="e"><%= gate['name'] %></a>
+            <span class="ui-li-count ui-btn-up-c ui-btn-corner-all"><%= gate['svc_id'] %></span>
+          </li>
+      <% end %>
+    <% else %>
+      <li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-corner-top">Child Gates</li>
+      <% for gate in @result.keys %>
+          <% if (gate == params["path"]) %>
+            <% next %>
+          <% end %>
+          <li>
+            <a href="/perry/gate?path=<%= gate %>" rel="external" data-theme="e"><%= gate %></a>
+            <span class="ui-li-count ui-btn-up-c ui-btn-corner-all"><%= @result[gate].length %></span>
+          </li>
+      <% end %>
+    <% end %>
+  </ul>
 
 </div>

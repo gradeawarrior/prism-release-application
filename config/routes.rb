@@ -1,4 +1,8 @@
 PrismReleaseApplication::Application.routes.draw do
+  root :to => "perry#gate"
+  
+  get "perry/release"
+
   get "perry/gate"
 
   get "graph/environment"
