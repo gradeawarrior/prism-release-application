@@ -17,7 +17,7 @@ class PerryController < ApplicationController
   end
   
   def listGates
-    url = URI.parse('http://m0008001.ppops.net/inv_api/v1/service_instance?subtype=gate&type=environment')
+    url = URI.parse('http://<sample_domain>/inv_api/v1/service_instance?subtype=gate&type=environment')
     req = Net::HTTP::Get.new(url.path + '?subtype=gate&type=environment')
     req.basic_auth("readonly", "readonly")
     res = Net::HTTP.start(url.host, url.port) {|http|
@@ -27,7 +27,7 @@ class PerryController < ApplicationController
   end
   
   def gateInfo(current_gate)
-    url = URI.parse("http://m0030773.lab.ppops.net:8889/v1/env/#{current_gate}/gateinfo?pretty")
+    url = URI.parse("http://<sample_domain>:<sample_port>/v1/env/#{current_gate}/gateinfo?pretty")
     req = Net::HTTP::Get.new(url.path)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
@@ -35,8 +35,8 @@ class PerryController < ApplicationController
     @result = JSON.parse(res.body)
     
     # Jira
-    #curl -Hcontent-type:application/json --data '{"jql":"cf[10000] = \"share\" and status = \"submitted\"", "fields":["id"]}' 'http://jgmyers:admin1!@jgmyers-vm5.eng.proofpoint.com:8080/rest/api/2/search'
-    url = URI.parse("http://jgmyers:admin1!@jgmyers-vm5.eng.proofpoint.com:8080/rest/api/2/search")
+    #curl -Hcontent-type:application/json --data '{"jql":"cf[10000] = \"share\" and status = \"submitted\"", "fields":["id"]}' 'http://<user>:<password>@<sample_domain>:<sample_port>/rest/api/2/search'
+    url = URI.parse("http://<user>:<password>@<sample_domain>:<sample_port>/rest/api/2/search")
     request_obj = {
       "jql" => "cf[10000] = \"#{current_gate}\" and status = \"released\"",
       "fields" => ["id"]
@@ -46,7 +46,7 @@ class PerryController < ApplicationController
     req = Net::HTTP::Post.new(url.path)
     req.body = request_obj.to_json
     req.content_type = 'application/json'
-    req.basic_auth("jgmyers", "admin1!")
+    req.basic_auth("<user>", "<password>")
     res = http.request(req)
     if (res.code == 200)
       @jira_search = @JSON.parse(res.body)
@@ -62,7 +62,7 @@ class PerryController < ApplicationController
   
   def promoteRelease(current_gate, current_release)
     ## Environment Promote
-    url = URI.parse("http://m0030773.lab.ppops.net:8889/v1/env/#{current_gate}/promote")
+    url = URI.parse("http://<sample_domain>:<sample_port>/v1/env/#{current_gate}/promote")
     path = "/v1/env/#{current_gate}/promote"
     request_obj = {"release"=>"#{current_release}"}
     http = Net::HTTP.new(url.host, url.port)
